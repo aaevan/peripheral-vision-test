@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=j, initial-scale=1.0">
-  <title>Document</title>
+  <title>Peripheral Vision Tester</title>
 </head>
 
 <style>
@@ -20,7 +20,6 @@
     height: 100%;
   }
   body {
-    /*background-color: black;*/
     background-image: linear-gradient(0deg, black, #666666);
   }
   .buttonsGroup {
@@ -53,7 +52,7 @@
     const colors = ['red', 'orange', 'yellow', 'green', 'blue', 'purple']
     const digits = [...'ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789']
 
-    const doFunction = (e) => {
+    const newCharColor = (e) => {
       console.log(e)
       randColor = colors[Math.round(Math.random() * (colors.length - 1))]
       randDigit = digits[Math.round(Math.random() * (digits.length - 1))]
@@ -71,17 +70,19 @@
 
     document.addEventListener("keyup", (e) => {
       console.log(e.code);
-      if (e.code === "KeyA") {
-        speak(`${randColor}, ${randDigit}`)
-      } 
-      if (e.code === "KeyF") {
-        doFunction();
-      } 
-      if (e.code === "Equal" || e.code === "Plus") {
-        header.style.fontSize = `${fontSize *= 1.05}px`
-      }
-      if (e.code === "Minus") {
-        header.style.fontSize = `${fontSize *= .95}px`
+      switch(e.code) {
+        case 'KeyA':
+          speak(`${randColor}, ${randDigit}`)
+          break;
+        case 'KeyF':
+          newCharColor();
+          break;
+        case 'Equal':
+          header.style.fontSize = `${fontSize *= 1.05}px`
+          break;
+        case 'Minus':
+          header.style.fontSize = `${fontSize *= .95}px`
+          break;
       }
     });
   </script>

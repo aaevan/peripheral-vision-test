@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=j, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<style>
+  .dispDigit {
+    font-size: 400px;
+    color: blue;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    transition: all .25s;
+  }
+  html {
+    height: 100%;
+  }
+  body {
+    /*background-color: black;*/
+    background-image: linear-gradient(0deg, black, #666666);
+  }
+  .buttonsGroup {
+    text-align: center;
+  }
+  .instructions {
+    color: white;
+    font-size: 1.5em;
+  }
+</style>
+
+<body>
+  <h1 class="dispDigit">0</h1>
+  <div class="buttonsGroup">
+    <p class="instructions">
+      Press <b>F</b> for a new character and color.
+      <br><br>
+      Press <b>A</b> to read the current value.
+    </p>
+  </div>
+  <script>
+    console.log("Woo!");
+
+    let header = document.querySelector('.dispDigit');
+    let button = document.querySelector(".newButton");
+    let minus = document.querySelector('.minus')
+    let plus = document.querySelector('.plus')
+    let randColor = 'blue';
+    let randDigit = '0';
+    let fontSize = 400
+
+    const colors = ['red', 'orange', 'yellow', 'green', 'blue', 'purple']
+    const digits = [...'ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789']
+
+    const doFunction = (e) => {
+      console.log(e)
+      randColor = colors[Math.round(Math.random() * (colors.length - 1))]
+      randDigit = digits[Math.round(Math.random() * (digits.length - 1))]
+      header.style.color = randColor;
+      header.innerHTML = randDigit;
+    }
+
+    function speak(utterance) {
+      //adapted from https://www.jefftk.com/speak
+      window.speechSynthesis.cancel();
+      window.speechSynthesis.speak(
+        new SpeechSynthesisUtterance(utterance)
+      );
+    }
+
+    document.addEventListener("keyup", (e) => {
+      console.log(e.code);
+      if (e.code === "KeyA") {
+        speak(`${randColor}, ${randDigit}`)
+      } 
+      if (e.code === "KeyF") {
+        doFunction();
+      } 
+      if (e.code === "Equal" || e.code === "Plus") {
+        header.style.fontSize = `${fontSize *= 1.05}px`
+      }
+      if (e.code === "Minus") {
+        header.style.fontSize = `${fontSize *= .95}px`
+      }
+    });
+  </script>
+</body>
+
+</html>

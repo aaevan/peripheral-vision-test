@@ -42,8 +42,6 @@
     </p>
   </div>
   <script>
-    console.log("Woo!");
-
     let header = document.querySelector('.dispDigit');
     let button = document.querySelector(".newButton");
     let minus = document.querySelector('.minus')
@@ -64,7 +62,7 @@
     }
 
     function speak(utterance) {
-      //adapted from https://www.jefftk.com/speak
+      //function adapted from https://www.jefftk.com/speak
       window.speechSynthesis.cancel();
       window.speechSynthesis.speak(
         new SpeechSynthesisUtterance(utterance)
